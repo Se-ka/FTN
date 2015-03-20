@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <script src="js/lib/require.js"></script>
     <script>
-        require(["js/login"]);
+		requirejs.config({
+			paths: {
+				"jquery": "js/lib/jquery-2.1.3.min"
+			}
+		});
+
+        requirejs(["js/login"]);
     </script>
     <title></title>
 </head>
