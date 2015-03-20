@@ -3,7 +3,7 @@
  */
 
 define (function (require){
-    var $ = require("js/lib/jquery-2.1.1");
+    var $ = require("jquery");
 
     console.log($("body"));
 
