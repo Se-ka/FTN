@@ -12,9 +12,37 @@
 
         requirejs(["js/login"]);
     </script>
+    <link rel="stylesheet" type="text/css" media="all" href="main.css" />
+
     <title></title>
 </head>
 <body>
+
+<div class="loginBlock">
+    <div>
+        <div class="textMemberLogin">Member login</div>
+    </div>
+    <div class="inputTextLoginBlock">
+        <div class="divTextName">
+            <input type="text" class="inputTextName" placeholder="input your name">
+        </div>
+        <div class="divTextPassword">
+            <input type="password" class="inputTextPassword" placeholder="input password">
+        </div>
+        <div>
+            <span>
+                <input type="checkbox" checked class="inputRememberMe">
+                <span>Remember me</span>
+            </span>
+        </div>
+        <span class="spanButtonLogin">
+            <input type="button" value="Login" class="inputButtonLogin">
+        </span>
+        <span class="spanButtonSignUp">
+            <input type="button" value="Sign Up" class="inputButtonSignUp">
+        </span>
+    </div>
+</div>
 
 </body>
 </html>

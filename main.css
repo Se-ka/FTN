@@ -1,0 +1,83 @@
+body {
+    background-color: #30B30A;
+}
+
+.loginBlock {
+    background-color: lawngreen;
+    margin-top: 250px;
+    margin-left: 350px;
+    width: 430px;
+    height: 240px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.inputTextLoginBlock{
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.textMemberLogin{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
+    font-style: italic; /* Курсивное начертание */
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid deeppink;
+    /*margin-left: 5px;
+    margin-right: 5px;*/
+}
+
+.divTextName {
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+}
+
+.divTextPassword {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.inputTextName {
+    border-radius: 5px;
+    width: 365px;
+    height: 30px;
+}
+
+.inputTextPassword {
+    border-radius: 5px;
+    width: 365px;
+    height: 30px;
+}
+
+.inputRememberMe {
+    width: 15px;
+    height: 15px;
+}
+
+.inputButtonLogin {
+    width: 184px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+}
+
+.inputButtonSignUp {
+    width: 184px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+
+.spanButtonLogin {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.spanButtonPassword {
+    /*margin-top: 5px;
+    margin-bottom: 5px;
+} */
