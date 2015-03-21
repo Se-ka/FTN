@@ -3,8 +3,11 @@
  */
 
 define (function (require){
+
+	require("cssLoader!css/login.css");
+
     var $ = require("jquery");
+	var loginTemplate = require("text!template/login.html");
 
-    console.log($("body"));
-
+	$("body").empty().append(loginTemplate);
 });
