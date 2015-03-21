@@ -7,14 +7,14 @@
     border: 1px solid #000000;
     border-radius: 10px;
 }
-.loginBlock .inputTextLoginBlock{
+.loginBlock .divTextLoginBlock {
     padding-top: 20px;
     padding-left: 30px;
 }
 .loginBlock .textMemberLogin {
     text-align: center;
-    font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
-    font-style: italic; /* Курсивное начертание */
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -36,10 +36,16 @@
 	height: 30px;
 	padding: 0 5px;
 }
+
+.loginBlock .divRememberMe,
+.loginBlock label {
+	cursor: pointer;
+}
+
 .loginBlock .inputRememberMe {
     width: 16px;
     height: 16px;
-}
+	}
 .loginBlock .buttonBlock {
 	margin-top: 15px;
 	margin-bottom: 5px;
@@ -48,4 +54,5 @@
     width: 184px;
     height: 30px;
     border-radius: 5px;
+	cursor: pointer;
 }
