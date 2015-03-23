@@ -47,7 +47,7 @@
     height: 16px;
 	}
 .loginBlock .buttonBlock {
-	margin-top: 15px;
+	margin-top: 5px;
 	margin-bottom: 5px;
 }
 .loginBlock button {
@@ -56,3 +56,12 @@
     border-radius: 5px;
 	cursor: pointer;
 }
+.loginBlock .divForError {
+    background-color: #050505;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 25px;
+}
+
+
