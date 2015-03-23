@@ -10,4 +10,40 @@ define (function (require){
 	var loginTemplate = require("text!template/login.html");
 
 	$("body").empty().append(loginTemplate);
+
+    var sendRegistrationData = function () {
+        var email = $("[name = email]").val(),
+            password = $("[name = password]").val();
+
+        $.ajax({
+            url: "http://freethenumbers.com/auth/user.php?action=registerViaEmail ",
+            type:"POST",
+            data: {email:email, password:password},
+            dataType: "jsonp"
+        })
+            .done();
+
+
+        console.log("click Login")
+    };
+
+    $("[name = buttonSingUp]").click(sendRegistrationData);
+
+
+    var sendLogin = function () {
+
+
+
+        console.log("click Login")
+    };
+
+    $("[name = buttonLogin]").click(sendLogin);
+
+
 });
+
+
+
+
+
+
