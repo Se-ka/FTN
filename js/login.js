@@ -12,16 +12,21 @@ define (function (require){
 	$("body").empty().append(loginTemplate);
 
     var sendRegistrationData = function () {
+
         var email = $("[name = email]").val(),
             password = $("[name = password]").val();
 
         $.ajax({
-            url: "http://freethenumbers.com/auth/user.php?action=registerViaEmail ",
+            url: "http://freethenumbers.com/auth/user.php?action=registerViaIdentity",
             type:"POST",
-            data: {email:email, password:password},
+            data: {
+	            identity: email,
+	            password: password
+            },
             dataType: "jsonp"
-        })
-            .done();
+        }).done(function(){
+
+        });
 
 
         console.log("click Login")
