@@ -11,21 +11,35 @@ define (function (require){
 
 	$("body").empty().append(loginTemplate);
 
+
     var sendRegistrationData = function () {
 
         var email = $("[name = email]").val(),
             password = $("[name = password]").val(),
-            error = $("[name=divForError]");
+            error = $("[name=divForError]"),
+            check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            checkEmail = check.test(email);
 
         if(email === '') {
             error.addClass("divForError").text('Fill in the fields!!!');
+            return;
         }else {
             error.removeClass("divForError");
+            if(checkEmail === false) {
+                error.addClass("divForError").text('Enter a valid email!!!');
+                return;
+            }else {
+                error.removeClass("divForError").text('');
+            }
+            console.log(email);
         }
+
         if(password === '') {
             error.addClass("divForError").text('Fill in the fields!!!');
+            return;
         }else {
-            error.removeClass("divForError").text('');;
+            error.removeClass("divForError").text('');
+
         }
         $.ajax({
             url: "http://freethenumbers.com/auth/user.php?action=registerViaIdentity",
@@ -37,13 +51,41 @@ define (function (require){
             dataType: "jsonp"
         }).done(function(){
         });
-        console.log("click Login")
+        console.log("click Sing Up")
     };
     $("[name = buttonSingUp]").click(sendRegistrationData);
 
 
     var sendLogin = function () {
+        var email = $("[name = email]").val(),
+            password = $("[name = password]").val(),
+            error = $("[name=divForError]");
 
+        if (email === '') {
+            error.addClass("divForError").text('Fill in the fields!!!');
+            return;
+        }else {
+            error.removeClass("divForError");
+        }
+
+        if(password === '') {
+            error.addClass("divForError").text('Fill in the fields!!!');
+            return;
+        }else {
+            error.removeClass("divForError").text('');
+
+        }
+        $.ajax({
+            url: "http://freethenumbers.com/auth/user.php?action=loginViaEmail",
+            type:"POST",
+            data: {
+                identity: email,
+                password: password
+            },
+            dataType: "jsonp"
+        }).done(function(){
+        });
+        console.log("click Login")
 
 
         console.log("click Login")
