@@ -12,35 +12,41 @@ define (function (require){
 	$("body").empty().append(loginTemplate);
 
 
-    var sendRegistrationData = function () {
-
+    var checkData = function () {
         var email = $("[name = email]").val(),
             password = $("[name = password]").val(),
             error = $("[name=divForError]"),
             check = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             checkEmail = check.test(email);
 
-        if(email === '') {
-            error.addClass("divForError").text('Fill in the fields!!!');
-            return;
-        }else {
-            error.removeClass("divForError");
-            if(checkEmail === false) {
-                error.addClass("divForError").text('Enter a valid email!!!');
-                return;
-            }else {
-                error.removeClass("divForError").text('');
+        error.removeClass("error").text('');
+        if (email === '') {
+            error.addClass("error").text('Fill in the fields!!!');
+            return false;
+        } else {
+            if (checkEmail === false) {
+                error.addClass("error").text('Enter a valid email!!!');
+                return false;
             }
             console.log(email);
         }
 
-        if(password === '') {
-            error.addClass("divForError").text('Fill in the fields!!!');
-            return;
-        }else {
-            error.removeClass("divForError").text('');
-
+        if (password === '') {
+            error.addClass("error").text('Fill in the fields!!!');
+            return false;
+        } else {
+            error.removeClass("error").text('');
         }
+        console.log("check Data");
+        return true;
+    };
+
+
+    var sendRegistrationData = function () {
+        var email = $("[name = email]").val(),
+            password = $("[name = password]").val(),
+            error = $("[name=divForError]");
+
         $.ajax({
             url: "http://freethenumbers.com/auth/user.php?action=registerViaIdentity",
             type:"POST",
@@ -49,32 +55,46 @@ define (function (require){
 	            password: password
             },
             dataType: "jsonp"
-        }).done(function(){
-        });
-        console.log("click Sing Up")
+        }).done(function (data) {
+            if (data.status === false) {
+                error.addClass("error").text('ERROR:' + data.reason +'!!!');
+             }else{
+                alert("You have successfully registered!!!");
+            }
+            console.log("I'm here!");
+        })
+            .fail(function() {
+                error.addClass("error").text('ERROR!!!');
+                return;
+            });
+
+
+
+
     };
-    $("[name = buttonSingUp]").click(sendRegistrationData);
+
+    var buttonSingUpClick = function () {
+        if (checkData() === true) {
+            sendRegistrationData();
+        }
+    };
+
+    var buttonSingUp = $("[name = buttonSingUp]");
+    buttonSingUp.click(buttonSingUpClick);
+
+
+
+
+
+
+
 
 
     var sendLogin = function () {
         var email = $("[name = email]").val(),
-            password = $("[name = password]").val(),
-            error = $("[name=divForError]");
+            password = $("[name = password]").val();
 
-        if (email === '') {
-            error.addClass("divForError").text('Fill in the fields!!!');
-            return;
-        }else {
-            error.removeClass("divForError");
-        }
-
-        if(password === '') {
-            error.addClass("divForError").text('Fill in the fields!!!');
-            return;
-        }else {
-            error.removeClass("divForError").text('');
-
-        }
+        checkData();
         $.ajax({
             url: "http://freethenumbers.com/auth/user.php?action=loginViaEmail",
             type:"POST",
@@ -85,14 +105,9 @@ define (function (require){
             dataType: "jsonp"
         }).done(function(){
         });
-        console.log("click Login")
-
-
-        console.log("click Login")
     };
-
-    $("[name = buttonLogin]").click(sendLogin);
-
+    var buttonLogin = $("[name = buttonLogin]");
+    buttonLogin.click(sendLogin);
 
 
 

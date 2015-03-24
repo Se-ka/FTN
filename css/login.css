@@ -56,7 +56,7 @@
     border-radius: 5px;
 	cursor: pointer;
 }
-.loginBlock .divForError {
+.loginBlock .error {
     background-color: #050505;
     color: red;
     text-align: center;
