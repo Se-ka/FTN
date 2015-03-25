@@ -41,6 +41,18 @@ define (function (require){
         return true;
     };
 
+    var transferMessagesFromTheServerToTheUserFriendlyLanguage = function (dataFromServerWithError) {
+        var error = $("[name=divForError]");
+        if (dataFromServerWithError.reason === "dont_have_params") {
+            error.addClass("error").text('ERROR: some query parameters are missing or it is empty!!!');
+        }
+        if (dataFromServerWithError.reason === "have_such_identity") {
+            error.addClass("error").text('ERROR: user with such data is already registered!!!');
+        }
+        if (dataFromServerWithError.reason === "failed_to_create") {
+            error.addClass("error").text('ERROR: user with such data is already registered!!!');
+        }
+    };
 
     var sendRegistrationData = function () {
         var email = $("[name = email]").val(),
@@ -55,22 +67,18 @@ define (function (require){
 	            password: password
             },
             dataType: "jsonp"
-        }).done(function (data) {
-            if (data.status === false) {
-                error.addClass("error").text('ERROR:' + data.reason +'!!!');
-             }else{
+        }).done(function (dataFromServer) {
+            if (dataFromServer.status === false) {
+                transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer);
+            }else{
                 alert("You have successfully registered!!!");
             }
-            console.log("I'm here!");
+            console.log("I'm here!", dataFromServer );
         })
             .fail(function() {
                 error.addClass("error").text('ERROR!!!');
                 return;
             });
-
-
-
-
     };
 
     var buttonSingUpClick = function () {
@@ -90,11 +98,11 @@ define (function (require){
 
 
 
-    var sendLogin = function () {
+    var sendLogindata = function () {
         var email = $("[name = email]").val(),
-            password = $("[name = password]").val();
+            password = $("[name = password]").val(),
+            error = $("[name=divForError]");
 
-        checkData();
         $.ajax({
             url: "http://freethenumbers.com/auth/user.php?action=loginViaEmail",
             type:"POST",
@@ -103,11 +111,27 @@ define (function (require){
                 password: password
             },
             dataType: "jsonp"
-        }).done(function(){
-        });
+        }).done(function (dataFromServer) {
+            if (dataFromServer.status === false) {
+                transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer);
+            }else{
+                alert("You have successfully registered!!!");
+            }
+            console.log("I'm here!", dataFromServer );
+        })
+            .fail(function() {
+                error.addClass("error").text('ERROR!!!');
+                return;
+            });
+    };
+
+    var buttonLoginClick = function () {
+        if (checkData() === true) {
+            sendLogindata();
+        }
     };
     var buttonLogin = $("[name = buttonLogin]");
-    buttonLogin.click(sendLogin);
+    buttonLogin.click(buttonLoginClick);
 
 
 

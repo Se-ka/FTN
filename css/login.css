@@ -32,7 +32,7 @@
 .loginBlock input[type=text],
 .loginBlock input[type=password] {
 	border-radius: 5px;
-	width: 365px;
+	width: 360px;
 	height: 30px;
 	padding: 0 5px;
 }
@@ -61,7 +61,7 @@
     color: red;
     text-align: center;
     font-weight: bold;
-    margin-right: 25px;
+    margin-right: 26px;
 }
 
 

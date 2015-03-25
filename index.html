@@ -8,7 +8,11 @@
     <script>
 	    require(["cssLoader!css/index.css"]);
 
-        require(["js/login"]);
+        require(["jquery"], function($) {
+            $(function() {
+                require (["js/login"]);
+            })
+        });
     </script>
  </head>
 <body></body>
