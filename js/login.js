@@ -41,20 +41,21 @@ define (function (require){
         return true;
     };
 
-    var transferMessagesFromTheServerToTheUserFriendlyLanguage = function (dataFromServerWithError) {
-        var error = $("[name=divForError]");
-        if (dataFromServerWithError.reason === "dont_have_params" || dataFromServerWithError.reason === "dont_have_params") {
-            error.addClass("error").text('ERROR: some query parameters are missing or it is empty!!!');
+    var transferMessagesFromTheServerToTheUserFriendlyLanguage = function (reasonFromServerWithError) {
+        var text;
+        if (reasonFromServerWithError === "dont_have_params") {
+            text = 'ERROR: some query parameters are missing or it is empty';
         }
-        if (dataFromServerWithError.reason === "have_such_identity") {
-            error.addClass("error").text('ERROR: user with such data is already registered!!!');
+        if (reasonFromServerWithError === "have_such_identity") {
+            text = 'ERROR: user with such data is already registered';
         }
-        if (dataFromServerWithError.reason === "failed_to_create") {
-            error.addClass("error").text('ERROR: user with such data is already registered!!!');
+        if (reasonFromServerWithError === "failed_to_create") {
+            text = 'ERROR: user with such data is already registered';
         }
-        if (dataFromServerWithError.reason === "wrong_pair") {
-            error.addClass("error").text('ERROR: incorrectly specified mail and/or password!!!');
+        if (reasonFromServerWithError === "wrong_pair") {
+            text = 'ERROR: incorrectly specified mail and/or password';
         }
+        return text;
     };
 
     var sendRegistrationData = function () {
@@ -72,14 +73,15 @@ define (function (require){
             dataType: "jsonp"
         }).done(function (dataFromServer) {
             if (dataFromServer.status === false) {
-                transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer);
+                var text = transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer.reason);
+                error.addClass("error").text(text);
             }else{
-                alert("You have successfully registered!!!");
+                alert("You have successfully registered");
             }
             console.log("I'm here!", dataFromServer );
         })
             .fail(function() {
-                error.addClass("error").text('ERROR!!!');
+                error.addClass("error").text('ERROR');
                 return;
             });
     };
