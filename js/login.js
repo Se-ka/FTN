@@ -11,6 +11,8 @@ define (function (require){
 
 	$("body").empty().append(loginTemplate);
 
+    var serverMessageTransform = require("js/serverMessageTransform");
+
 
     var checkData = function () {
         var email = $("[name = email]").val(),
@@ -41,23 +43,6 @@ define (function (require){
         return true;
     };
 
-    var transferMessagesFromTheServerToTheUserFriendlyLanguage = function (reasonFromServerWithError) {
-        var text;
-        if (reasonFromServerWithError === "dont_have_params") {
-            text = 'ERROR: some query parameters are missing or it is empty';
-        }
-        if (reasonFromServerWithError === "have_such_identity") {
-            text = 'ERROR: user with such data is already registered';
-        }
-        if (reasonFromServerWithError === "failed_to_create") {
-            text = 'ERROR: user with such data is already registered';
-        }
-        if (reasonFromServerWithError === "wrong_pair") {
-            text = 'ERROR: incorrectly specified mail and/or password';
-        }
-        return text;
-    };
-
     var sendRegistrationData = function () {
         var email = $("[name = email]").val(),
             password = $("[name = password]").val(),
@@ -73,7 +58,7 @@ define (function (require){
             dataType: "jsonp"
         }).done(function (dataFromServer) {
             if (dataFromServer.status === false) {
-                var text = transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer.reason);
+                var text = serverMessageTransform.transform(dataFromServer.reason);
                 error.addClass("error").text(text);
             }else{
                 alert("You have successfully registered");
@@ -82,7 +67,6 @@ define (function (require){
         })
             .fail(function() {
                 error.addClass("error").text('ERROR');
-                return;
             });
     };
 
@@ -118,7 +102,7 @@ define (function (require){
             dataType: "jsonp"
         }).done(function (dataFromServer) {
             if (dataFromServer.status === false) {
-                transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer);
+                serverMessageTransform.transform(dataFromServer);
             }else{
                 alert("You have successfully logged!!!");
             }
@@ -126,7 +110,6 @@ define (function (require){
         })
             .fail(function() {
                 error.addClass("error").text('ERROR!!!');
-                return;
             });
     };
 
