@@ -43,7 +43,7 @@ define (function (require){
 
     var transferMessagesFromTheServerToTheUserFriendlyLanguage = function (dataFromServerWithError) {
         var error = $("[name=divForError]");
-        if (dataFromServerWithError.reason === "dont_have_params") {
+        if (dataFromServerWithError.reason === "dont_have_params" || dataFromServerWithError.reason === "dont_have_params") {
             error.addClass("error").text('ERROR: some query parameters are missing or it is empty!!!');
         }
         if (dataFromServerWithError.reason === "have_such_identity") {
@@ -51,6 +51,9 @@ define (function (require){
         }
         if (dataFromServerWithError.reason === "failed_to_create") {
             error.addClass("error").text('ERROR: user with such data is already registered!!!');
+        }
+        if (dataFromServerWithError.reason === "wrong_pair") {
+            error.addClass("error").text('ERROR: incorrectly specified mail and/or password!!!');
         }
     };
 
@@ -104,7 +107,7 @@ define (function (require){
             error = $("[name=divForError]");
 
         $.ajax({
-            url: "http://freethenumbers.com/auth/user.php?action=loginViaEmail",
+            url: "http://freethenumbers.com/auth/user.php?action=loginViaIdentity",
             type:"POST",
             data: {
                 identity: email,
@@ -115,7 +118,7 @@ define (function (require){
             if (dataFromServer.status === false) {
                 transferMessagesFromTheServerToTheUserFriendlyLanguage (dataFromServer);
             }else{
-                alert("You have successfully registered!!!");
+                alert("You have successfully logged!!!");
             }
             console.log("I'm here!", dataFromServer );
         })
