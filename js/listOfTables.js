@@ -15,7 +15,10 @@ define (function (require){
     var sendLogout = function () {
 
         require("store").store("sessionToken", null);
-        require(["js/login"]);
+
+        require (["js/login"], function(login) {
+            login.run();
+        });
 
         console.log("clickButtonLogout!!!")
     };

@@ -13,7 +13,9 @@
                 if (store.store("sessionToken")) {
                     require (["js/listOfTables"]);
                 } else {
-                    require (["js/login"]);
+                    require (["js/login"], function(login) {
+                        login.run();
+                    });
                 }
             })
         });

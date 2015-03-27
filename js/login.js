@@ -11,10 +11,18 @@ define (function (require){
 	    loginTemplate = require("text!template/login.html"),
         serverMessageTransform = require("js/serverMessageTransform");
 
+    var buttonLoginClick = function () {
+        if (checkData() === true) {
+            sendLoginData();
+        }
+    };
 
-	$("body").empty().append(loginTemplate);
-
-
+    var buttonSingUpClick = function () {
+        if (checkData() === true) {
+            sendRegistrationData();
+        }
+    };
+    
     var checkData = function () {
         var email = $("[name = email]").val(),
             password = $("[name = password]").val(),
@@ -43,49 +51,7 @@ define (function (require){
         return true;
     };
 
-    var sendRegistrationData = function () {
-        var email = $("[name = email]").val(),
-            password = $("[name = password]").val(),
-            error = $("[name=divForError]");
-
-        $.ajax({
-            url: "http://freethenumbers.com/auth/user.php?action=registerViaIdentity",
-            type:"POST",
-            data: {
-	            identity: email,
-	            password: password
-            },
-            dataType: "jsonp"
-        }).done(function (dataFromServer) {
-
-            if (dataFromServer.status === false) {
-                var text = serverMessageTransform.transform(dataFromServer.reason);
-                error.addClass("error").text(text);
-            }else{
-                alert("You have successfully registered");
-            }
-
-            console.log("I'm here!", dataFromServer );
-
-            store.store("sessionToken", dataFromServer.authInfo.authToken);
-
-        }).fail(function() {
-            error.addClass("error").text('ERROR');
-        });
-    };
-
-    var buttonSingUpClick = function () {
-        if (checkData() === true) {
-            sendRegistrationData();
-        }
-    };
-
-
-    var buttonSingUp = $("[name = buttonSingUp]");
-    buttonSingUp.click(buttonSingUpClick);
-
-
-    var sendLogindata = function () {
+    var sendLoginData = function () {
         var email = $("[name = email]").val(),
             password = $("[name = password]").val(),
             error = $("[name=divForError]");
@@ -116,26 +82,43 @@ define (function (require){
         });
     };
 
-    var buttonLoginClick = function () {
-        if (checkData() === true) {
-            sendLogindata();
+    var sendRegistrationData = function () {
+        var email = $("[name = email]").val(),
+            password = $("[name = password]").val(),
+            error = $("[name=divForError]");
+
+        $.ajax({
+            url: "http://freethenumbers.com/auth/user.php?action=registerViaIdentity",
+            type:"POST",
+            data: {
+                identity: email,
+                password: password
+            },
+            dataType: "jsonp"
+        }).done(function (dataFromServer) {
+
+            if (dataFromServer.status === false) {
+                var text = serverMessageTransform.transform(dataFromServer.reason);
+                error.addClass("error").text(text);
+            }else{
+                alert("You have successfully registered");
+            }
+
+            console.log("I'm here!", dataFromServer );
+
+            store.store("sessionToken", dataFromServer.authInfo.authToken);
+
+        }).fail(function() {
+            error.addClass("error").text('ERROR');
+        });
+    };
+
+    return {
+        run: function() {
+            $("body").empty().append(loginTemplate);
+            
+            $("[name = buttonLogin]").click(buttonLoginClick);
+            $("[name = buttonSingUp]").click(buttonSingUpClick);
         }
     };
-    var buttonLogin = $("[name = buttonLogin]");
-    buttonLogin.click(buttonLoginClick);
-
-
-
-
-
-
-
-
-
 });
-
-
-
-
-
-
