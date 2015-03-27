@@ -109,6 +109,8 @@ define (function (require){
 
             store.store("sessionToken", dataFromServer.authInfo.authToken);
 
+            require (["js/listOfTables"]);
+
         }).fail(function() {
             error.addClass("error").text('ERROR!!!');
         });
