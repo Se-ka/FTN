@@ -6,12 +6,13 @@ define (function (require){
 
 	require("cssLoader!css/login.css");
 
-    var $ = require("jquery");
-	var loginTemplate = require("text!template/login.html");
+    var $ = require("jquery"),
+        store = require("store"),
+	    loginTemplate = require("text!template/login.html"),
+        serverMessageTransform = require("js/serverMessageTransform");
+
 
 	$("body").empty().append(loginTemplate);
-
-    var serverMessageTransform = require("js/serverMessageTransform");
 
 
     var checkData = function () {
