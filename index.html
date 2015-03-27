@@ -8,9 +8,13 @@
     <script>
 	    require(["cssLoader!css/index.css"]);
 
-        require(["jquery"], function($) {
+        require(["jquery", "store"], function($, store) {
             $(function() {
-                require (["js/login"]);
+                if (store.store("sessionToken")) {
+                    alert("надо показать страницу со списков таблиц");
+                } else {
+                    require (["js/login"]);
+                }
             })
         });
     </script>
