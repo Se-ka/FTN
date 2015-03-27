@@ -32,7 +32,6 @@ define (function (require){
             }
             console.log(email);
         }
-
         if (password === '') {
             error.addClass("error").text('Fill in the fields!!!');
             return false;
@@ -69,22 +68,39 @@ define (function (require){
                 error.addClass("error").text('ERROR');
             });
     };
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    var GetListOfTables = function () {
+        var error = $("[name=divForError]");
 
+        $.ajax({
+            url: "http://freethenumbers.com//api.php?action=getListOfAbaxes&type=table",
+            type:"POST",
+            dataType: "jsonp"
+        }).done(function (dataFromServer) {
+          /*if (dataFromServer.status === false) {
+                var text = serverMessageTransform.transform(dataFromServer.reason);
+                error.addClass("error").text(text);
+            }else{
+                alert("You have successfully registered");
+            }*/
+            console.log("I'm here!", dataFromServer );
+        })
+            .fail(function() {
+                error.addClass("error").text('ERROR');
+            });
+    };
+    GetListOfTables();
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////
     var buttonSingUpClick = function () {
         if (checkData() === true) {
             sendRegistrationData();
         }
     };
 
+
     var buttonSingUp = $("[name = buttonSingUp]");
     buttonSingUp.click(buttonSingUpClick);
-
-
-
-
-
-
-
 
 
     var sendLogindata = function () {
@@ -102,7 +118,8 @@ define (function (require){
             dataType: "jsonp"
         }).done(function (dataFromServer) {
             if (dataFromServer.status === false) {
-                serverMessageTransform.transform(dataFromServer);
+                var text = serverMessageTransform.transform(dataFromServer.reason);
+                error.addClass("error").text(text);
             }else{
                 alert("You have successfully logged!!!");
             }
