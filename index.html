@@ -11,7 +11,7 @@
         require(["jquery", "store"], function($, store) {
             $(function() {
                 if (store.store("sessionToken")) {
-                    alert("надо показать страницу со списков таблиц");
+                    require (["js/listOfTables"]);
                 } else {
                     require (["js/login"]);
                 }

@@ -67,7 +67,7 @@ define (function (require){
 
             console.log("I'm here!", dataFromServer );
 
-            store.store("sessionToken", dataFromServer.abc);
+            store.store("sessionToken", dataFromServer.authInfo.authToken);
 
         }).fail(function() {
             error.addClass("error").text('ERROR');
@@ -107,7 +107,7 @@ define (function (require){
             }
             console.log("I'm here!", dataFromServer );
 
-            store.store("sessionToken", dataFromServer.abc);
+            store.store("sessionToken", dataFromServer.authInfo.authToken);
 
         }).fail(function() {
             error.addClass("error").text('ERROR!!!');
@@ -125,38 +125,11 @@ define (function (require){
 
 
 
-/*
-    function addCo  mment () {
-        var nameVal = $('#name').val(),
-            nE = '#nam',
-            cE = '#com',// = //
-            comVal = $('#aCom').val();
 
-        if(nameVal === '') {
-            $(nE).addClass("error").text('You forgot to enter a name!!!');
-        }else {
-            $(nE).removeClass("error");
-            $(nE).text("The author's name:");
-        }
-        if(comVal === '') {
-            $(cE).addClass("error");
-            $(cE).text('You forgot to enter a comment!!!');
 
-        }else {
-            $(cE).removeClass("error");
-            $(cE).text("The author's comment:");
 
-            $.ajax({
-                url: server + "?action=add&author="
-                + nameVal + "&text=" + comVal + "&v=2",
-                dataType: "jsonp"
-            })
-                .done(addCommentsToBuffer);
-//            .fail(messageError);
-            console.log('add comment');
-        }
-    }
-*/
+
+
 });
 
 
