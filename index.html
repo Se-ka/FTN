@@ -11,7 +11,9 @@
         require(["jquery", "store"], function($, store) {
             $(function() {
                 if (store.store("sessionToken")) {
-                    require (["js/listOfTables"]);
+                    require (["js/listOfTables"], function(listOfTables) {
+                        listOfTables.run();
+                    });
                 } else {
                     require (["js/login"], function(login) {
                         login.run();

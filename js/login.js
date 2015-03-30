@@ -68,14 +68,17 @@ define (function (require){
             if (dataFromServer.status === false) {
                 var text = serverMessageTransform.transform(dataFromServer.reason);
                 error.addClass("error").text(text);
-            }else{
-                alert("You have successfully logged!!!");
             }
+
+            alert("You have successfully logged!");
+
             console.log("I'm here!", dataFromServer );
 
             store.store("sessionToken", dataFromServer.authInfo.authToken);
 
-            require (["js/listOfTables"]);
+            require (["js/listOfTables"], function(listOfTables) {
+                listOfTables.run();
+            });
 
         }).fail(function() {
             error.addClass("error").text('ERROR!!!');
@@ -100,13 +103,18 @@ define (function (require){
             if (dataFromServer.status === false) {
                 var text = serverMessageTransform.transform(dataFromServer.reason);
                 error.addClass("error").text(text);
-            }else{
-                alert("You have successfully registered");
+                return true;
             }
+
+            alert("You have successfully registered");
 
             console.log("I'm here!", dataFromServer );
 
             store.store("sessionToken", dataFromServer.authInfo.authToken);
+
+            require (["js/listOfTables"], function(listOfTables) {
+                listOfTables.run();
+            });
 
         }).fail(function() {
             error.addClass("error").text('ERROR');

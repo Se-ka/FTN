@@ -8,22 +8,20 @@ define (function (require){
     var $ = require("jquery"),
         listOfTablesTemplate = require("text!template/listOfTables.html");
 
-
-    $("body").empty().append(listOfTablesTemplate);
-
-
     var sendLogout = function () {
 
         require("store").store("sessionToken", null);
 
         require (["js/login"], function(login) {
-            login.run();
+            require (login.run());
         });
-
         console.log("clickButtonLogout!!!")
     };
 
-
-    var buttonLogout = $("[name = buttonLogout]");
-    buttonLogout.click(sendLogout);
+    return {
+        run: function () {
+            $("body").empty().append(listOfTablesTemplate);
+            $("[name = buttonLogout]").click(sendLogout);
+        }
+    };
 });
