@@ -14,7 +14,10 @@ define (function (require){
         $.ajax({
             url: "http://freethenumbers.com/api.php?action=getListOfAbaxes&type=table",
             dataType: "jsonp"
-        }).done(function (data) {
+        }).done(function (dataFromServer) {
+
+
+
 
             console.log("You can see list of tables");
 
