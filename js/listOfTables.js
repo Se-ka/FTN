@@ -6,8 +6,12 @@ define (function (require){
     require("cssLoader!css/listOfTables.css");
 
     var $ = require("jquery"),
-        listOfTablesTemplate = require("text!template/listOfTables.html");
+        _ = require("underscore"),
+        listOfTablesTemplate = require("text!template/listOfTables.html"),
+        tableBlockTemplate = require("text!template/tableBlock.html");
 
+    // compiled piece of html template which can produce personalized text
+    var compiledTableBlock = _.template(tableBlockTemplate);
 
     var fetchingListOfTables = function () {
 
@@ -16,36 +20,30 @@ define (function (require){
             dataType: "jsonp"
         }).done(function (dataFromServer) {
 
+            var blockOfTables = $("[name=blockOfTables]").empty();
 
+            _.each(dataFromServer.items, function(item) {
+                var htmlBlock = compiledTableBlock(item);
 
-
-            console.log("You can see list of tables");
+                blockOfTables.append(htmlBlock);
+            });
 
         })
     };
 
-
-
     var sendLogout = function () {
-
         require("store").store("sessionToken", null);
-
         require (["js/login"], function(login) {
             require (login.run());
         });
-
     };
-
-    console.log("Tables");
-
-    fetchingListOfTables();
-
-
 
     return {
         run: function () {
             $("body").empty().append(listOfTablesTemplate);
             $("[name = buttonLogout]").click(sendLogout);
+
+            fetchingListOfTables();
         }
     };
 });
