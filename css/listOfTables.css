@@ -1,30 +1,25 @@
 .forListOfTables .buttonForLogout {
-
     margin-left: 1100px;
 }
 
-h1 {
+.forListOfTables h1 {
     text-align: center;
 }
 
-.blockForShitOfTables {
+.forListOfTables .blockOfTables {
     background-color: lawngreen;
     margin: 50px 0 0 370px;
+    padding: 50px;
     width: 430px;
     height: 240px;
     border: 1px solid #000000;
     border-radius: 10px;
 }
 
-.shitOfTables {
+.forListOfTables .tableBlock {
+    padding: 10px;
     background-color: lime;
-    margin-top: 45px;
-    margin-left: 65px;
-    width: 300px;
-    height: 150px;
     border: 1px solid #000000;
     border-radius: 10px;
-}
-.inputForTable {
-    margin: 16px 0 0 16px;
+    margin-bottom: 5px;
 }
