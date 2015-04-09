@@ -1,14 +1,15 @@
 /**
  * Created by sergiy on 27.03.15.
  */
-define (function (require){
 
+define (function (require){
+// при помощи require даём листу таблиц правила css
     require("cssLoader!css/listOfTables.css");
 
     var $ = require("jquery"),
         _ = require("underscore"),
-        listOfTablesTemplate = require("text!template/listOfTables.html"),
-        tableBlockTemplate = require("text!template/tableBlock.html");
+        listOfTablesTemplate = require("text!template/listOfTables.html"),//
+        tableBlockTemplate = require("text!template/tableBlock.html");//
 
     // compiled piece of html template which can produce personalized text
     var compiledTableBlock = _.template(tableBlockTemplate);
