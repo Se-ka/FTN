@@ -2,24 +2,59 @@
     margin-left: 1100px;
 }
 
-.forListOfTables h1 {
-    text-align: center;
-}
-
 .forListOfTables .blockOfTables {
     background-color: #48577D;
-    margin: 50px 0 0 370px;
-    padding: 50px;
+    margin: 5% 0 0 33%;
     width: 430px;
     height: 240px;
     border: 1px solid #000000;
     border-radius: 10px;
 }
 
+.forListOfTables .blockOfTables .TextListOfTables {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid deeppink;
+}
+
+.blockForNameOfTable .name{
+    padding: 0 0 20px 20px;
+}
+
+.forListOfTables .blockOfTables .blockForNameOfTable .checkboxForNameOfTable{
+    width: 16px;
+    height: 16px;
+}
+
+.forListOfTables .blockOfTables .blockForNameOfTable .textNameOfTable {
+    width: 250px;
+    height: 30px;
+    margin: 0 0 0 10px;
+    border-radius: 5px;
+}
+
+
+.forListOfTables .blockOfTables .buttons{
+    margin: 0 0 0 30px;
+}
+.forListOfTables button {
+    margin: 0 0 0 30px;
+    width: 107px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*
 .forListOfTables .tableBlock {
     padding: 10px;
     background-color: #1c94c4;
     border: 1px solid #000000;
     border-radius: 10px;
     margin-bottom: 5px;
-}
+}*/

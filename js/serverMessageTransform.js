@@ -1,7 +1,4 @@
-define(function(){
-
-    return {
-        transform: function (reasonFromServerWithError) {
+        transform = function (reasonFromServerWithError) {
             var text;
             if (reasonFromServerWithError === "dont_have_params") {
                 text = 'ERROR: some query parameters are missing or it is empty';
@@ -16,7 +13,4 @@ define(function(){
                 text = 'ERROR: incorrectly specified mail and/or password';
             }
             return text;
-        }
-    };
-
-});
+        };
