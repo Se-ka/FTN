@@ -685,7 +685,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * The service guarantees that the identity of the `$routeParams` object will remain unchanged
  * (but its properties will likely change) even when a route change occurs.
  *
- * Note that the `$routeParams` are only updated *after* a route change completes successfully.
+ * Note that the `$routeParams` are only updat{"data":"42c08dbfe230920f550afac10ef9f41f19b5c7651986807493dfa9155a49fd868a28662e4035f9a11438331414","expires":null}ed *after* a route change completes successfully.
  * This means that you cannot rely on `$routeParams` being correct in route resolve functions.
  * Instead you can use `$route.current.params` to access the new route's parameters.
  *

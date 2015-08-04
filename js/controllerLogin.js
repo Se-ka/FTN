@@ -1,9 +1,8 @@
 'use strict';
 
-/* Controllers */
+    //Router
 
-
-FTNControllers.config(['$routeProvider',
+FTN.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
         when('/login', {
@@ -12,16 +11,20 @@ FTNControllers.config(['$routeProvider',
         });
   }]);
 
+    //Controller
+
 FTNControllers.controller('login', ['$scope', '$location',
   function($scope, $location) {
 
-/*
-    if(amplify.store("sessionToken", dataFromServer.authInfo.authToken)) {
+    //checked whether there is a "sessionToken" in "Local Storage"
+    // (when login, the data coming from the server, stores them in the variable "sessionToken"
+    // and save "Local Storage") and if logged in then go to the "List of tables"
+    // when button "Create", will call this function and "angular" redirect on another page "New table"
+    if (amplify.store("sessionToken")) {
       $location.url('/listOfTables');
       $scope.$apply();
       return
     }
-*/
 
 
     $scope.buttonLoginClick = function () {
@@ -36,6 +39,7 @@ FTNControllers.controller('login', ['$scope', '$location',
       }
     };
 
+    // checked "email" and "password"
     $scope.checkData = function () {
       var email = $("[name = email]").val(),
           password = $("[name = password]").val(),
@@ -52,7 +56,6 @@ FTNControllers.controller('login', ['$scope', '$location',
           error.addClass("error").text('Enter a valid email!!!');
           return false;
         }
-        console.log(email);
       }
       if (password === '') {
         error.addClass("error").text('Fill in the fields!!!');
@@ -60,7 +63,6 @@ FTNControllers.controller('login', ['$scope', '$location',
       } else {
         error.removeClass("error").text('');
       }
-      console.log("check Data");
       return true;
     };
 
@@ -83,12 +85,10 @@ FTNControllers.controller('login', ['$scope', '$location',
           error.addClass("error").text(text);
         }
 
-        //alert("You have successfully logged!");
-
-        console.log("I'm here!", dataFromServer );
-
-        amplify.store("sessionToken", dataFromServer.authInfo.authToken);// remember the Token
+        // when login, the data coming from the server,
+        // stores them in the variable "sessionToken" and save "Local Storage"
         // it necessary each once for requests to server
+        amplify.store("sessionToken", dataFromServer.authInfo.authToken);
 
         $location.url('/listOfTables');
         $scope.$apply();
@@ -119,29 +119,23 @@ FTNControllers.controller('login', ['$scope', '$location',
           return true;
         }
 
-        alert("You have successfully registered");
-
-        console.log("I'm here!", dataFromServer );
-
         amplify.store("sessionToken", dataFromServer.authInfo.authToken);
 
         $location.url('/listOfTables');
         $scope.$apply();
 
       }).fail(function() {
-        error.addClass("error").text('ERROR');
+          error.addClass("error").text('ERROR');
       });
     };
 
 
     $scope.buttonLogin = function() {
       $scope.buttonLoginClick();
-      console.log("I worked - Login!");
     };
 
     $scope.buttonSingUp = function() {
       $scope.buttonSingUpClick();
-      console.log("I worked - SingUp!");
     };
 
   }]);

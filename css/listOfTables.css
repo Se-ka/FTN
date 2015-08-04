@@ -1,5 +1,8 @@
-.forListOfTables .buttonForLogout {
-    margin-left: 1100px;
+.forListOfTables button {
+    width: 107px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .forListOfTables .blockOfTables {
@@ -22,16 +25,16 @@
     border-bottom: 1px solid deeppink;
 }
 
-.blockForNameOfTable .name{
+.forBlockForNameOfTable .forNameOfTable   {
     padding: 0 0 20px 20px;
 }
 
-.forListOfTables .blockOfTables .blockForNameOfTable .checkboxForNameOfTable{
+.forListOfTables .blockOfTables .forBlockForNameOfTable .checkboxForNameOfTable{
     width: 16px;
     height: 16px;
 }
 
-.forListOfTables .blockOfTables .blockForNameOfTable .textNameOfTable {
+.forListOfTables .blockOfTables .forBlockForNameOfTable .textNameOfTable {
     width: 250px;
     height: 30px;
     margin: 0 0 0 10px;
@@ -42,14 +45,14 @@
 .forListOfTables .blockOfTables .buttons{
     margin: 0 0 0 30px;
 }
-.forListOfTables button {
-    margin: 0 0 0 30px;
-    width: 107px;
-    height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
+
+.forListOfTables .forButtonCreate {
+    margin: 0 0 0 30px;
+}
+.forListOfTables .forButtonDelete{
+    margin: 0 0 0 30px;
+}
 /*
 .forListOfTables .tableBlock {
     padding: 10px;

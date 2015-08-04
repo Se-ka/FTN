@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" media="all" href="css/newTable.css">
-</head>
-<body>
-
 
 <div class="newTable">
 
+    <button class="buttonForReturn" name="buttonLogout" ng-click="return()">Return</button>
 
     <div class="blockNewTable" name="blockNewTable">
         <div class="label">New table</div>
 
         <div class="blockForNameOfNewTable">
             <div class="signToEnterTheNameOfTheNewTable">
-                Please enter a name of new table!
+                Please enter the name of the new table!
             </div>
 
 
@@ -25,12 +17,8 @@
                    autofocus="autofocus"
                    placeholder="name of new table"/>
             <div class="buttons">
-                <button>Save</button>
+                <button class="buttonForSave" ng-click="save()">Save</button>
             </div>
         </div>
     </div>
 </div>
-
-
-</body>
-</html>

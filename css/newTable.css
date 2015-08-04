@@ -1,3 +1,9 @@
+.newTable button {
+    width: 107px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 .newTable .blockNewTable {
     background-color: #48577D;
@@ -32,12 +38,6 @@
     padding: 0 5px;
 }
 
-
-.newTable button {
-
+.newTable .blockNewTable .blockForNameOfNewTable .buttonForSave {
     margin: 30px 0 0 35%;
-    width: 107px;
-    height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
 }
