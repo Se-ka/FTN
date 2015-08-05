@@ -12,36 +12,73 @@ FTN.config(['$routeProvider',
             });
     }]);
 
-FTNControllers.controller('newTable', ['$scope', '$location', '$http',
-    function($scope, $location, $http) {
+FTNControllers.controller('newTable', ['$scope', '$location', '$http', function($scope, $location, $http) {
 
-        $scope.return = function (){
+    $scope.return = function (){
+        $location.url('/listOfTables');
+        //$scope.$apply();
+        console.log('button "Return" a triggered');
+    };
+
+    $scope.save = function () {
+
+        var requestParams = [
+            "callback=JSON_CALLBACK",
+            "_ftnAccessToken=" + amplify.store("sessionToken"),
+            "action=saveAbax",
+            "title=" + $('[class="nameOfNewTable"]').val(),
+            "type=table",
+            "config[names][ls]=table",
+            "config[names][Us]=Table",
+            "config[names][lp]=tables",
+            "config[names][Up]=Tables",
+            "config[type]=table",
+            "config[abax_id]=-1",
+            "config[title]=SOME_NAME_HERE",
+            "config[rows]=3",
+            "config[cols]=5",
+            "config[roundTo]=1",
+            "config[decimalFormat]=false",
+            "config[numberSeparator]=,",
+            "config[currency]=$",
+            "config[tableZeroCellTitle]=",
+            "config[shortUrl]=false",
+            "labels[rows][]=name me",
+            "labels[rows][]=name me",
+            "labels[rows][]=name me",
+            "labels[columns][]=M1",
+            "labels[columns][]=M2",
+            "labels[columns][]=M3",
+            "labels[columns][]=M4",
+            "labels[columns][]=M5",
+            "values[0][]=0",
+            "values[0][]=0",
+            "values[0][]=0",
+            "values[0][]=0",
+            "values[0][]=0",
+            "values[1][]=0",
+            "values[1][]=0",
+            "values[1][]=0",
+            "values[1][]=0",
+            "values[1][]=0",
+            "values[2][]=0",
+            "values[2][]=0",
+            "values[2][]=0",
+            "values[2][]=0",
+            "values[2][]=0",
+            "version=1"
+        ];
+
+        $http.jsonp("http://freethenumbers.com/api.php?" + requestParams.join("&")).
+
+        success(function(data) {
             $location.url('/listOfTables');
-            //$scope.$apply();
-            console.log('button "Return" a triggered');
-        };
+        }).
 
-        $scope.save = function () {
-
-            $http.jsonp('http://freethenumbers.com/api.php?' +
-                'action=getListOfAbaxes&type=table&callback=JSON_CALLBACK&_ftnAccessToken='
-                + amplify.store("sessionToken")).
-
-                success(function(data) {
-                    $location.url('/listOfTables');
-                    $scope.tables = data.items;
-                    amplify.store('ListOfTables', data.items);
-                }).
-
-                error(function(data) {
-                });
+            error(function(data) {
+            });
 
         console.log('button "Save" was triggered');
 
-        };
-
-
-
-
-
-    }]);
+    };
+}]);

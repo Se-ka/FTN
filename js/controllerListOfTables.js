@@ -70,3 +70,52 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
       if (2) {}
     };
 }]);
+
+//////////////////////////////////////////////
+
+
+
+var myFun = function () {
+
+};
+
+var myFun1 = new myFun();
+
+myFun.prototype.property1 = 'property1_value';
+
+myFun1.property1;
+
+
+var myFun = function () {
+
+};
+
+var myFun1 = new myFun();
+
+myFun.prototype.property = 'prototype1';
+
+myFun1.property;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
