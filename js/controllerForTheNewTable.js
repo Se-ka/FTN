@@ -20,13 +20,22 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
         console.log('button "Return" a triggered');
     };
 
+
     $scope.save = function () {
 
+    var valueOfInput = $('[name=inputNameOfNewTable]').val(),
+        inputNameOfNewTable = $('[name=signToEnterTheNameOfTheNewTable]');
+
+    if(valueOfInput === ''){
+        inputNameOfNewTable.addClass("error");
+        console.log('IF worked!');
+        return;
+    }
         var requestParams = [
             "callback=JSON_CALLBACK",
             "_ftnAccessToken=" + amplify.store("sessionToken"),
             "action=saveAbax",
-            "title=" + $('[class="nameOfNewTable"]').val(),
+            "title=" + valueOfInput,
             "type=table",
             "config[names][ls]=table",
             "config[names][Us]=Table",
@@ -70,15 +79,12 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
         ];
 
         $http.jsonp("http://freethenumbers.com/api.php?" + requestParams.join("&")).
-
-        success(function(data) {
-            $location.url('/listOfTables');
-        }).
-
+            success(function() {
+                $location.url('/listOfTables');
+            }).
             error(function(data) {
             });
 
         console.log('button "Save" was triggered');
-
     };
 }]);

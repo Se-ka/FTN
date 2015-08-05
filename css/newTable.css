@@ -26,11 +26,18 @@
 }
 
 
-.signToEnterTheNameOfTheNewTable {
+.newTable .blockNewTable .blockForNameOfNewTable .forSignToEnterTheNameOfTheNewTable {
     text-align: center;
 }
 
-.newTable .blockNewTable .blockForNameOfNewTable .nameOfNewTable     {
+.newTable .blockNewTable .blockForNameOfNewTable .forSignToEnterTheNameOfTheNewTable.error {
+    font-style: italic;
+    background-color: #050505;
+    color: red;
+    font-weight: bold;
+}
+
+.newTable .blockNewTable .blockForNameOfNewTable .forInputNameOfNewTable     {
     width: 250px;
     height: 30px;
     margin: 20px 0 0 20%;
@@ -41,3 +48,5 @@
 .newTable .blockNewTable .blockForNameOfNewTable .buttonForSave {
     margin: 30px 0 0 35%;
 }
+
+
