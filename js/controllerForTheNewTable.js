@@ -20,7 +20,6 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
         console.log('button "Return" a triggered');
     };
 
-
     $scope.save = function () {
 
     var valueOfInput = $('[name=inputNameOfNewTable]').val(),
