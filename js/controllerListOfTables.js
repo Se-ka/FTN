@@ -19,6 +19,8 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
 
     $scope.tables = amplify.store('ListOfTables');
 
+    var renderingListTableAfterRemoving = function () {
+
     // Now we send http request to get list of tables and sign this request with sessionToken
     $http.jsonp('http://freethenumbers.com/api.php?' +
         'action=getListOfAbaxes&type=table&callback=JSON_CALLBACK&_ftnAccessToken='
@@ -26,16 +28,18 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
 
         // we got an response !
         success(function (data) {
+            console.log(data.items[0].id);
             // save tables into $scope to pass them into html
             $scope.tables = data.items;
             // and let's save currrent list of tables into localStorage to let them render next time
             // before we send http request
             amplify.store('ListOfTables', data.items);
-
         }).
         // damn, some error happened, let's handle that
-        error(function (data) {
+        error(function () {
         });
+    };
+    renderingListTableAfterRemoving();
 
     // this is a click event listener for the button "Create"
     // which should open new UI and let user to create new table
@@ -55,39 +59,22 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
 
     $scope.deleteTheTable = function () {
 
-        $scope.allCheckboxes = $("[name=nameOfTable] input:checkbox:checked")
-        .map(function() {
-            return this.value;
-        }).get();
+    var allCheckboxes = $("[name=nameOfTable] input:checkbox:checked")
+            .map(function() { return parseInt($(this).attr("tableid"))}).get();
 
         //$scope.allCheckboxes = $("[name = 'nameOfTable'] input:checkbox:enabled");
-        console.log($scope.allCheckboxes);
+        console.log(allCheckboxes);
 
-        //var notChecked = allCheckboxes.not(':checked');
-        //allCheckboxes.removeAttr('checked');
-        //notChecked.attr('checked', 'checked');
-
-
-
-
-
-
-        $http.jsonp('http://freethenumbers.com/api.php?action=removeAbax' +
-            amplify.store("sessionToken")).
-
+        $http.jsonp('http://freethenumbers.com/api.php?action=removeAbax&callback=JSON_CALLBACK' +
+            '&_ftnAccessToken=' + amplify.store("sessionToken") +
+            "&list=" + JSON.stringify(allCheckboxes)).
             // we got an response !
-            success(function (data) {
-                // save tables into $scope to pass them into html
-                $scope.tables = data.items;
-                // and let's save currrent list of tables into localStorage to let them render next time
-                // before we send http request
-                amplify.store('ListOfTables', data.items);
-
+            success(function () {
+                renderingListTableAfterRemoving();
             }).
             // damn, some error happened, let's handle that
-            error(function (data) {
+            error(function () {
             });
-
         if (2) {}
     };
 }]);
@@ -96,26 +83,6 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
 
 
 
-var myFun = function () {
-
-};
-
-var myFun1 = new myFun();
-
-myFun.prototype.property1 = 'property1_value';
-
-myFun1.property1;
-
-
-var myFun = function () {
-
-};
-
-var myFun1 = new myFun();
-
-myFun.prototype.property = 'prototype1';
-
-myFun1.property;
 
 
 

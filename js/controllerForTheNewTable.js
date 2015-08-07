@@ -14,11 +14,27 @@ FTN.config(['$routeProvider',
 
 FTNControllers.controller('newTable', ['$scope', '$location', '$http', function($scope, $location, $http) {
 
+    $('[name=inputNameOfNewTable]').focus();
+
     $scope.return = function (){
         $location.url('/listOfTables');
         //$scope.$apply();
         console.log('button "Return" a triggered');
     };
+
+
+
+    $('body').keyup(function(){
+
+        if(event.keyCode==13)
+            console.log('9999999');
+        {
+            $(this).click();
+            return false;
+        }
+    });
+
+
 
     $scope.save = function () {
 
@@ -87,3 +103,9 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
         console.log('button "Save" was triggered');
     };
 }]);
+
+
+
+
+
+
