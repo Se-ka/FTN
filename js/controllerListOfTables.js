@@ -12,6 +12,20 @@ FTN.config(['$routeProvider',function ($routeProvider) {
 // Creating controller
 FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
+    $scope.varEventListener = function (event) {
+        if ( $('[name=nameOfTable] input:checkbox:checked').length != 0 && event.keyCode==13) {
+            console.log('111111111');
+            $scope.deleteTheTable();
+        }
+        if ( $('[name=nameOfTable] input:checkbox:checked').length == 0 && event.keyCode==13) {
+            console.log('jhjkgjk');
+            $scope.createTheNewTable();
+        }
+    };
+
+    document.body.addEventListener('keyup', $scope.varEventListener);
+
+
     // Controller renders HTML code immediately, and the list of tables
     // in html code will be empty until we get list of tables from the server
     // But we can render tables which were saved in previous controller's call (see code below)
@@ -19,7 +33,7 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
 
     $scope.tables = amplify.store('ListOfTables');
 
-    var renderingListTableAfterRemoving = function () {
+    var renderingListTable = function () {
 
     // Now we send http request to get list of tables and sign this request with sessionToken
     $http.jsonp('http://freethenumbers.com/api.php?' +
@@ -39,13 +53,13 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
         error(function () {
         });
     };
-    renderingListTableAfterRemoving();
+    renderingListTable();
 
     // this is a click event listener for the button "Create"
     // which should open new UI and let user to create new table
     $scope.createTheNewTable = function () {
         $location.url('/newTable');
-        //$scope.$apply();
+        $scope.$apply();
         console.log('button "Create" was triggered');
     };
 
@@ -54,12 +68,12 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
     $scope.logout = function () {
         amplify.store("sessionToken", null);
         $location.url('/login');
-        //$scope.$apply();
+        $scope.$apply();
     };
 
     $scope.deleteTheTable = function () {
 
-    var allCheckboxes = $("[name=nameOfTable] input:checkbox:checked")
+    var allCheckboxes = $('[name=nameOfTable] input:checkbox:checked')
             .map(function() { return parseInt($(this).attr("tableid"))}).get();
 
         //$scope.allCheckboxes = $("[name = 'nameOfTable'] input:checkbox:enabled");
@@ -70,7 +84,7 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
             "&list=" + JSON.stringify(allCheckboxes)).
             // we got an response !
             success(function () {
-                renderingListTableAfterRemoving();
+                renderingListTable();
             }).
             // damn, some error happened, let's handle that
             error(function () {

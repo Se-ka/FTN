@@ -14,27 +14,27 @@ FTN.config(['$routeProvider',
 
 FTNControllers.controller('newTable', ['$scope', '$location', '$http', function($scope, $location, $http) {
 
-    $('[name=inputNameOfNewTable]').focus();
+    var focusOnInputNameOfNewTable = $('[name=inputNameOfNewTable]').focus();
 
     $scope.return = function (){
+        document.body.removeEventListener('keyup', $scope.varEventListener);
         $location.url('/listOfTables');
-        //$scope.$apply();
+        $scope.$apply();
         console.log('button "Return" a triggered');
     };
 
 
-
-    $('body').keyup(function(){
-
-        if(event.keyCode==13)
-            console.log('9999999');
-        {
-            $(this).click();
-            return false;
+    $scope.varEventListener = function (event) {
+        //debugger;
+        if ( focusOnInputNameOfNewTable[0] === event.srcElement && event.keyCode==13) {
+            $scope.save();
         }
-    });
+        if (event.keyCode==27) {
+            $scope.return();
+        }
+    };
 
-
+    document.body.addEventListener('keyup', $scope.varEventListener);
 
     $scope.save = function () {
 
@@ -95,6 +95,7 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
 
         $http.jsonp("http://freethenumbers.com/api.php?" + requestParams.join("&")).
             success(function() {
+                document.body.removeEventListener('keyup', $scope.varEventListener);
                 $location.url('/listOfTables');
             }).
             error(function(data) {
