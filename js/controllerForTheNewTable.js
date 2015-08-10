@@ -4,7 +4,7 @@
 'use strict';
 
 FTN.config(['$routeProvider',
-    function($routeProvider) {
+    function ($routeProvider) {
         $routeProvider.
             when('/newTable', {
                 templateUrl: 'template/newTable.html',
@@ -12,11 +12,11 @@ FTN.config(['$routeProvider',
             });
     }]);
 
-FTNControllers.controller('newTable', ['$scope', '$location', '$http', function($scope, $location, $http) {
+FTNControllers.controller('newTable', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 
     var focusOnInputNameOfNewTable = $('[name=inputNameOfNewTable]').focus();
 
-    $scope.return = function (){
+    $scope.return = function () {
         document.body.removeEventListener('keyup', $scope.varEventListener);
         $location.url('/listOfTables');
         $scope.$apply();
@@ -26,26 +26,26 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
 
     $scope.varEventListener = function (event) {
         //debugger;
-        if ( focusOnInputNameOfNewTable[0] === event.srcElement && event.keyCode==13) {
+        if (focusOnInputNameOfNewTable[0] === event.srcElement && event.keyCode == 13) {
             $scope.save();
         }
-        if (event.keyCode==27) {
+        if (event.keyCode == 27) {
             $scope.return();
         }
     };
-
     document.body.addEventListener('keyup', $scope.varEventListener);
+
 
     $scope.save = function () {
 
-    var valueOfInput = $('[name=inputNameOfNewTable]').val(),
-        inputNameOfNewTable = $('[name=signToEnterTheNameOfTheNewTable]');
+        var valueOfInput = $('[name=inputNameOfNewTable]').val(),
+            inputNameOfNewTable = $('[name=signToEnterTheNameOfTheNewTable]');
 
-    if(valueOfInput === ''){
-        inputNameOfNewTable.addClass("error");
-        console.log('IF worked!');
-        return;
-    }
+        if (valueOfInput === '') {
+            inputNameOfNewTable.addClass("error");
+            console.log('IF worked!');
+            return;
+        }
         var requestParams = [
             "callback=JSON_CALLBACK",
             "_ftnAccessToken=" + amplify.store("sessionToken"),
@@ -94,11 +94,11 @@ FTNControllers.controller('newTable', ['$scope', '$location', '$http', function(
         ];
 
         $http.jsonp("http://freethenumbers.com/api.php?" + requestParams.join("&")).
-            success(function() {
+            success(function () {
                 document.body.removeEventListener('keyup', $scope.varEventListener);
                 $location.url('/listOfTables');
             }).
-            error(function(data) {
+            error(function (data) {
             });
 
         console.log('button "Save" was triggered');

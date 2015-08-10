@@ -34,7 +34,7 @@
     height: 16px;
 }
 
-.forListOfTables .blockOfTables .forBlockForNameOfTable .textNameOfTable {
+.forListOfTables .blockOfTables .forBlockForNameOfTable .forTextNameOfTable {
     width: 370px;
     height: 30px;
     margin: 0 0 0 3%;
@@ -42,17 +42,15 @@
 }
 
 
-.forListOfTables .blockOfTables .buttons{
-    margin: 0 0 0 15%;
+.forListOfTables .blockOfTables .allButtons{
+    margin: 0 0 0 4%;
 }
 
 
-.forListOfTables .forButtonCreate {
+.forListOfTables .buttons {
     margin: 0 0 0 30px;
 }
-.forListOfTables .forButtonDelete{
-    margin: 0 0 0 30px;
-}
+
 /*
 .forListOfTables .tableBlock {
     padding: 10px;

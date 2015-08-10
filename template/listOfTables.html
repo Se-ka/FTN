@@ -7,14 +7,14 @@
         <div class="TextListOfTables">List of tables</div>
 
         <div class="forBlockForNameOfTable" name="blockForNameOfTable">
-            <div ng-repeat="table in tables" class="forNameOfTable"
-                 name="nameOfTable">
+            <div ng-repeat="table in tables" class="forNameOfTable" name="nameOfTable">
             <input type ="checkbox" class="checkboxForNameOfTable" tableId={{table.id}}>
-            <input type="text" value={{table.title}} class="textNameOfTable">
+            <input type="text" value={{table.title}} class="forTextNameOfTable" name="textNameOfTable">
             </div>
-            <div class="buttons">
-                <button class="forButtonCreate" ng-click="createTheNewTable()">Create</button>
-                        <button class="forButtonDelete" ng-click="deleteTheTable()">Delete</button>
+            <div class="allButtons">
+                <button class="forButtonCreate buttons" ng-click="createTheNewTable()">Create</button>
+                <button class="forButtonDelete buttons" ng-click="deleteTheTable()">Delete</button>
+                <button class="forButtonRename buttons" ng-click="renameTheTable()">Rename</button>
             </div>
         </div>
     </div>
