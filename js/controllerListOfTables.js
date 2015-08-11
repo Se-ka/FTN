@@ -105,25 +105,44 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
             }).get();
         console.log(arrayOfTableNames);
 
-        var l = arrayOfTableNames.length;
-        console.log('button "Rename" was triggered = ' + l);
+        //var l = arrayOfTableNames.length;
+        //console.log('button "Rename" was triggered = ' + l);
+        //
+        //for (var i = 0; i < l; i++) {
+        //    var valueOfInput = $('[name=textNameOfTable]').val();
+        //    console.log('button "Rename" was triggered' + l);
+        //};
 
-        for (var i = 0; i < l; i++) {
-            var valueOfInput = $('[name=textNameOfTable]').val();
-            console.log('button "Rename" was triggered' + l);
+
+        var newNames = {},
+        $divs = $("[name=blockForNameOfTable] [name=nameOfTable]");
+        for (var i = 0; i < $divs.length; i++) {
+
+            var $div = $($divs[i]),
+            tableID = $div.find("input[type=checkbox]").attr("tableid"),
+            tableName = $div.find("input[type=text]").val();
+
+            newNames[tableID] = tableName;
+
+            //console.log($divs);
+            //console.log($divs[i]);
+            //console.log($($divs[i]));
+            //console.log(tableID);
+            //console.log(tableName);
+            continue;
 
             var requestParams = [
                 "callback=JSON_CALLBACK",
                 "_ftnAccessToken=" + amplify.store("sessionToken"),
                 "action=saveAbax",
-                "title=" + valueOfInput,
+                "title=" + tableName,
                 "type=table",
                 "config[names][ls]=table",
                 "config[names][Us]=Table",
                 "config[names][lp]=tables",
                 "config[names][Up]=Tables",
                 "config[type]=table",
-                "config[abax_id]=-1",
+                "config[abax_id]=" + tableID,
                 "config[title]=SOME_NAME_HERE",
                 "config[rows]=3",
                 "config[cols]=5",
@@ -167,7 +186,7 @@ FTNControllers.controller('listOfTables', ['$scope', '$http', '$location', funct
                 });
             console.log('button "Rename" was triggered');
         }
-    }
+    };
 }]);
 
 //////////////////////////////////////////////
